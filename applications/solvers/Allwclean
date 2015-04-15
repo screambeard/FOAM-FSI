@@ -1,22 +1,17 @@
-#! /bin/bash
-
+#!/bin/sh
 cd ${0%/*} || exit 1    # run from this directory
 
-wclean correctRhieChowSolvers/pimpleFoamRC
-wclean correctRhieChowSolvers/pimpleDyMFoamRC
-wclean correctRhieChowSolvers/pimpleBodyFoamRC
-wclean correctRhieChowSolvers/icoFoamRC
-wclean correctRhieChowSolvers/simpleFoamRC
+wclean all consistentSolvers
 
 # FSI
 wclean fsi/bodyMotionFoam
-wclean fsi/pimpleBodyFsiFoamRC
-wclean fsi/pimpleBodyFsiGustFoam
+wclean fsi/pimpleBodyFsiFoam
+wclean fsi/pimpleRigidBodyFsiFoam
 wclean fsi/simpleBodyFsiFoam
 
 # Gusts
-wclean gust/pimpleBodyGustFoamRC/
-wclean gust/pimpleGustFoam
+#wclean gust/pimpleBodyGustFoamRC
+#wclean gust/pimpleGustFoam
 
 # Coupled
 wclean coupled/pUCoupledFoam
@@ -27,4 +22,3 @@ wclean movingMesh/moveBodyFoam
 wclean movingMesh/myMoveDynamicMesh
 wclean simpleFoamChannel
 wclean simpleSRFAbsFoam
-wclean simpleSRFAbsFoamRC

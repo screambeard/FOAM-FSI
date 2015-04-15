@@ -21,5 +21,4 @@ wmake coupled/unsteadyPUCoupledFoam
 wmake movingMesh/moveBodyFoam
 wmake movingMesh/myMoveDynamicMesh
 wmake simpleFoamChannel
-wmake simpleSRFAbsFoamRC
 wmake simpleSRFAbsFoam

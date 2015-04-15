@@ -1,18 +1,8 @@
 #!/bin/sh
 cd ${0%/*} || exit 1    # run from this directory
 
-wclean pimpleNoBodyFoamCircle
-wclean pimpleNoBodyFoamCiC
 wclean pimpleNoBodyFoamCiCrotExp
-wclean pimpleNoBodyFoamCiCrotExp_uf
-wclean pimpleNoBodyFoamTGV
-wclean pimpleNoBodyFoamRC
-wclean DGCLpimpleBodyFoam
 wclean DGCLpimpleBodyFoamBDF3
-wclean DGCLpimpleBodyFoam_uf
 wclean pimpleBodyFsiFoamBDF3
 wclean pimpleBodyFoamBDF3
-wclean pimpleDyMFoamRC_rel
-wclean pimpleDyMFoamRC_rel-endRelax
-wclean pimpleFoamRC_res
-wclean pimpleFoamRC_rel
+wclean inverseMatrixTesting

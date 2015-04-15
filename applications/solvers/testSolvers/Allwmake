@@ -2,7 +2,6 @@
 cd ${0%/*} || exit 1    # run from this directory
 
 wmake pimpleNoBodyFoamCiCrotExp
-wmake DGCLpimpleBodyFoam
 wmake DGCLpimpleBodyFoamBDF3
 wmake pimpleBodyFsiFoamBDF3
 wmake pimpleBodyFoamBDF3

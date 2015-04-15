@@ -32,7 +32,7 @@
     phi.oldTime();
 
     //Creating field to store old face areas needed voor ddtPhiCorr
-#   include "createSf.H"
+#   include "createUf.H"
 #   include "createV000.H"
 
     //Read pressure properties and create turbulence model

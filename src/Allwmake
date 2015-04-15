@@ -6,8 +6,10 @@ wmake libso myBoundaries
 wmake libso RBFmeshInterpolation
 wmake libso gusts
 wmake libso bodyMotion
+wmake libso bodyMotions
 wmake libso rigidBody
 wmake libso fsi
 wmake libso mySolidBodyMotion
 wmake libso myTurbulenceModels
 wmake libso SRFModelAbs
+wmake libso RBFMeshMotionSolver
