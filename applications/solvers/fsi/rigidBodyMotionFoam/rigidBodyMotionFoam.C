@@ -43,7 +43,6 @@ int main(int argc, char *argv[])
 #   include "createTime.H"//Create runtime environment
 #   include "createMesh.H"//Create dynamic fluid mesh
 #   include "readRigidBodyProperties.H"//Reading body properties: spring stifnesses, mass properties, cg, rc
-#   include "readTimeControls.H"//Read controlDict
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
@@ -53,9 +52,6 @@ int main(int argc, char *argv[])
 
     while (runTime.run())
     {
-//#       include "readPIMPLEControls.H"//Read PISO control every new time step
-#       include "readTimeControls.H"//Read controlDict every new time step
-
         // New time
         runTime++;
         Info<< "Time = " << runTime.timeName() << nl << endl;

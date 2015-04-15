@@ -5,14 +5,13 @@ wmake all consistentSolvers
 
 # FSI
 wmake fsi/bodyMotionFoam
-wmake fsi/pimpleBodyFsiFoamRC
-wmake fsi/pimpleRigidBodyFsiFoamRC
-wmake fsi/pimpleBodyFsiGustFoam
+wmake fsi/pimpleBodyFsiFoam
+wmake fsi/pimpleRigidBodyFsiFoam
 wmake fsi/simpleBodyFsiFoam
 
 # Gusts
-wmake gust/pimpleBodyGustFoamRC
-wmake gust/pimpleGustFoam
+#wmake gust/pimpleBodyGustFoamRC
+#wmake gust/pimpleGustFoam
 
 # Coupled
 wmake coupled/pUCoupledFoam

@@ -48,7 +48,6 @@ int main(int argc, char *argv[])
 #   include "createFields.H"
 #	include "readGustProperties.H"
 #   include "initContinuityErrs.H"
-#	include "checkTimeDiscretisationSchemeRC.H"
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
     Info<< "\nStarting time loop\n" << endl;

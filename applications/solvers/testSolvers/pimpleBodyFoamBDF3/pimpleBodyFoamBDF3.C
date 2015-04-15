@@ -73,7 +73,6 @@ int main(int argc, char *argv[])
         bodyCol.update();
         ms.setMotion(bodyCol.getPatchMotion());
         bool meshChanged = mesh.update();
-#       include "updateSf.H"
 
         if (correctPhi && (mesh.moving() || meshChanged))
         {
@@ -87,16 +86,11 @@ int main(int argc, char *argv[])
 #           include "meshCourantNo.H"
         }
 
-        label oCorr=1;
-        scalar relativeResidual = 1;
-        bool converged=false;
-        bool lastIter=false;
+        label oCorr=0;
         do
         {
-            Info << "outer iteration: " << oCorr << endl;
-            maxResidual = 0;//reset maxResidual for new outerloop
+            Info << "outer iteration: " << oCorr+1 << endl;
 
-            p.storePrevIter();
             U.storePrevIter();
 #           include "UEqn.H"
 
@@ -104,34 +98,26 @@ int main(int argc, char *argv[])
             label corr=0;
             do
             {
-                corr++;
+                p.storePrevIter();
 #               include "pEqn.H"
-            }while(eqnResidual > innerConvergence && corr < nCorr);
+                corr++;
+            }while(innerResidual > innerTolerance && corr < nCorr);
 
 #           include "movingMeshContinuityErrs.H"
 
-            //Info << "Doing Relexation on turbulence" << endl;
+            //Correct turbulence
             turbulence->correct();
 
-            //Get residuals
-            scalar residualPressure = gSumMag( p.internalField() - p.prevIter().internalField() ) / gSumMag( p.internalField() );
-            scalar residualVelocity = gSumMag( U.internalField() - U.prevIter().internalField() ) / gSumMag( U.internalField() );
-            relativeResidual = max( residualPressure, residualVelocity );
-            Info << "residualPressure = " << residualPressure << ", residualVelocity = " << residualVelocity << endl;
-
-            //Check if this was the last iter and set converged to true
-            if(lastIter){
-                converged = true;
-            }
-            //Check convergence and set lastIter to true
-            if(relativeResidual < outerConvergence || oCorr == nOuterCorr){
-                lastIter = true;
-            }
+            //Check convergence
+#           include "checkPIMPLEResidualConvergence.H"
 
             oCorr++;
-            //Info << "lastIter|converged = " << lastIter << "|" << converged << endl;
-        }while(!converged);
+        }while(!outerLoopConverged);
 
+        //Update the face velocities
+        fvc::makeAbsolute(phi, U);
+#       include "updateUf.H"
+        fvc::makeRelative(phi, U);
 
         runTime.write();
         //Write bodyMotion properties to file (if requested)

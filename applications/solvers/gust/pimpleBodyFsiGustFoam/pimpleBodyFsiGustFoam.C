@@ -35,9 +35,14 @@ Description
 #include "singlePhaseTransportModel.H"
 #include "turbulenceModel.H"
 #include "dynamicFvMesh.H"
+#include "gust.H"
+    
 #include "RBFMotionSolverExt.H"
 #include "fsiInterface.H"
 #include "bodyCollector.H"
+
+#include "processorFvsPatchFields.H"
+#include "inletOutletFvPatchFields.H"    
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
@@ -46,10 +51,13 @@ int main(int argc, char *argv[])
 #   include "setRootCase.H"//Set location of case
 #   include "createTime.H"//Create runtime environment
 #   include "createDynamicFvMesh.H"//Create dynamic fluid mesh
+#   include "checkTimeDiscretisationSchemeRC.H"
 #   include "createFields.H"//Create fluid fields for incompressible flow & read (constant) density (rhoFluid)
+#   include "readTimeControls.H"//Read controlDict
 #   include "initContinuityErrs.H"//Initialize continuity error calculations
+#   include "readGustProperties.H"//read gust properties from constant/gustProperties
 #   include "readBodyProperties.H"//Reading body properties: spring stifnesses, mass properties, cg, rc
-#   include "readCouplingProperties.H"//Read coupling patches solid and fluid. Construct interpolators (fluid-solid, solid-fluid), mesh motion object (tForce, motionUFluidPatch, tppi)
+#   include "readCouplingProperties.H"//Read coupling patches solid and fluid.
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
     Info<< "\nStarting time loop\n" << endl;
@@ -60,49 +68,54 @@ int main(int argc, char *argv[])
 #       include "CourantNo.H"//Calculate Co
 #       include "setDeltaT.H"//Set dT according to Co if requested
 
-#       include "updateV000.H"
-
         // New time
         runTime++;
-
-#       include "updateV000.H"
         Info<< "Time = " << runTime.timeName() << nl << endl;
-
+        
         //Update old values because new time step
         bodyCol.update();
 
-		//Re-initialize variables each time step
-		fsiInter.reset();
-
+        //Re-initialize variables each time step
+        fsiInter.reset();
+		
 		do{
+
         	Info<< "Fsi iteration = " << fsiInter.iter() << endl;
 
-#           include "setMotion.H"
+	#       include "setMotion.H"
+            
+            //Inlcude gust fluxes
+    #       include "setGust.H"
+    #       include "setArtificialVolumeChange.H"
 
-#           include "solveFluid.H"
+            if (correctPhi && (mesh.moving() || meshChanged))
+            {
+                // Fluxes will be corrected to absolute velocity
+                // HJ, 6/Feb/2009
+    #           include "correctPhi.H"
+            }
 
+	#       include "solveFluid.H"
+			
 			fsiInter.update(rhoFluid,nu,U,p);
 		} while(!fsiInter.converged());
-
+		
 		Info << "Number of fsi coupling iterations needed: " << fsiInter.iter() << endl;
 
-        //Update the face velocities for next time step
-        fvc::makeAbsolute(phi, U);
-#       include "updateUf.H"
-        fvc::makeRelative(phi, U);
-
-		//Writing data
-        runTime.write();
         //Write bodyMotion properties to file (if requested)
 		bodyCol.write();
 		//Write fsi properties to file (if requested)
 		fsiInter.write();
+		
+        Utotal == U + fvc::average(Ugust);
+        Utotal.rename("Utotal");
+        runTime.write();
 
         Info<< "ExecutionTime = " << runTime.elapsedCpuTime() << " s"
             << "  ClockTime = " << runTime.elapsedClockTime() << " s"
             << nl << endl;
     }
-
+    
     Info<< "End\n" << endl;
 
     return(0);

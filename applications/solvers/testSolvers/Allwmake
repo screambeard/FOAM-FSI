@@ -1,18 +1,9 @@
 #!/bin/sh
 cd ${0%/*} || exit 1    # run from this directory
 
-wmake pimpleNoBodyFoamCircle
-wmake pimpleNoBodyFoamCiC
 wmake pimpleNoBodyFoamCiCrotExp
-wmake pimpleNoBodyFoamCiCrotExp_uf
-wmake pimpleNoBodyFoamTGV
-wmake pimpleNoBodyFoamRC
 wmake DGCLpimpleBodyFoam
 wmake DGCLpimpleBodyFoamBDF3
-wmake DGCLpimpleBodyFoam_uf
 wmake pimpleBodyFsiFoamBDF3
 wmake pimpleBodyFoamBDF3
-wmake pimpleDyMFoamRC_rel
-wmake pimpleDyMFoamRC_rel-endRelax
-wmake pimpleFoamRC_res
-wmake pimpleFoamRC_rel
+wmake inverseMatrixTesting

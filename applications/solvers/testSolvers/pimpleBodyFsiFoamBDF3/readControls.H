@@ -1,6 +1,5 @@
 #   include "readTimeControls.H"
-#   include "readPIMPLEControls.H"
-#   include "readPIMPLELoopControls.H"
+#   include "readAutoPIMPLEControls.H"
 
     bool correctPhi = false;
     if (pimple.found("correctPhi"))

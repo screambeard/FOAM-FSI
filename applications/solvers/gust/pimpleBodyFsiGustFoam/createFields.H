@@ -37,6 +37,21 @@ volScalarField p
     mesh
 );
 
+volScalarField p_prevIter
+(
+    IOobject
+    (
+        "p_prevIter",
+        runTime.timeName(),
+        mesh,
+        IOobject::NO_READ,
+        IOobject::NO_WRITE
+    ),
+    p
+);
+
+
+
 Info<< "Reading field U\n" << endl;
 volVectorField U
 (
@@ -50,14 +65,44 @@ volVectorField U
     ),
     mesh
 );
-U.oldTime();
+
+Info<< "Creating surfaceField Ugust\n" << endl;
+surfaceVectorField Ugust
+(
+    IOobject
+    (
+        "UgustFace",
+        runTime.timeName(),
+        mesh,
+        IOobject::NO_READ,
+        IOobject::AUTO_WRITE
+    ),
+    mesh,
+    U.dimensions(),
+    fixedValueFvPatchVectorField::typeName
+);
+Ugust==dimensionedVector("UgustFace",U.dimensions(),vector::zero);
+Ugust.oldTime() == dimensionedVector("UgustFace",U.dimensions(),vector::zero);
+
+volVectorField Utotal
+(
+    IOobject
+    (
+        "Utotal",
+        runTime.timeName(),
+        mesh,
+        IOobject::NO_READ,
+        IOobject::AUTO_WRITE
+    ),
+    U+fvc::average(Ugust)
+);
+Utotal.write();
 
 #   include "createPhi.H"
 phi.oldTime();
 
 //Creating field to store old face areas needed voor ddtPhiCorr
-#   include "createUf.H"
-#   include "createV000.H"
+#   include "createSf.H"
 
 //Read pressure properties and create turbulence model
 label pRefCell = 0;
@@ -102,3 +147,20 @@ volVectorField HU
     U.dimensions()/runTime.deltaT().dimensions(),
     zeroGradientFvPatchVectorField::typeName
 );
+
+volScalarField Udummy
+(
+    IOobject
+    (
+        "Udummy",
+        runTime.timeName(),
+        mesh,
+        IOobject::NO_READ,
+        IOobject::NO_WRITE
+    ),
+    mesh,
+    dimensionSet(0,0,0,0,0,0,0),
+    fixedValueFvPatchVectorField::typeName
+);
+Udummy == 1.0;
+Udummy.oldTime() == 1.0;
