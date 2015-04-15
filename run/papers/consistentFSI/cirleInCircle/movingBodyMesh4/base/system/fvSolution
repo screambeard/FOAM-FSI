@@ -21,16 +21,7 @@ solvers
         solver           PCG;
         preconditioner   DIC;
         tolerance        1e-11;
-        relTol           0;
-		minIter			 1;
-    };
-
-    pFinal
-    {
-        solver           PCG;
-        preconditioner   DIC;
-        tolerance        1e-11;
-        relTol           0;
+        relTol           0.005;
 		minIter			 1;
     };
 
@@ -39,7 +30,7 @@ solvers
         solver           BiCGStab;
         preconditioner   DILU;
         tolerance        1e-11;
-        relTol           0;
+        relTol           0.005;
 		minIter			 1;
     };
 }
@@ -49,15 +40,15 @@ PIMPLE
     checkMeshCourantNo true;
     momentumPredictor yes;
 
-    nOuterCorrectors 1000;
+    nOuterCorrectors 200;
     nCorrectors     10;
-    nNonOrthogonalCorrectors 1;
+    nNonOrthogonalCorrectors 0;
 
     pRefCell		0;
     pRefValue       0;
 
-    outerConvergence 1e-11;
-    innerConvergence 0;
+    momentumTolerance 1e-9;
+    innerTolerance 0;
 }
 
 // ************************************************************************* //

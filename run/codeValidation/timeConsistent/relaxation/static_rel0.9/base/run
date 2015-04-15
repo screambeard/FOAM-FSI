@@ -6,8 +6,9 @@ cd ${0%/*} || exit 1
 . $WM_PROJECT_DIR/bin/tools/RunFunctions
 
 # Get application name from directory
-application="pimpleFoamRC_rel"
+application="consistentPimpleFoam"
 
 cellSet
 runApplication $application
 writeSets
+

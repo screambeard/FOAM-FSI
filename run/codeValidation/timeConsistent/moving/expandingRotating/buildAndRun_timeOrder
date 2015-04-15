@@ -35,7 +35,7 @@ basecase="base"
 basename='cic'
 
 #variables
-schemes=["bdf1","bdf2","bdf2nor",,"bdf2area","bdf3"]
+schemes=["bdf1","bdf2","bdf2nor","bdf2area","bdf3"]
 dts=[0.000125,0.000625,0.00125,0.0025,0.005,0.01,0.02]
 writeInterval0=1600;
 

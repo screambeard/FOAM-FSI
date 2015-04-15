@@ -10,93 +10,43 @@ set(0,'defaultlinemarkersize',12)
 % === Options === %
 
 % ofDir='/home/thijsgillebaart/foam/thijsgillebaart-3.1/';
-ofDir='/media/thijsgillebaart/THIJSDATA/foam/thijsgillebaart-3.1/';
+% ofDir='/media/thijsgillebaart/THIJSDATA/foam/thijsgillebaart-3.1/';
 % ofDir='/Users/thijsgillebaart/foam/thijsgillebaart-3.1';
 % ofDir='/Volumes/THIJSDATA/foam/thijsgillebaart-3.1/';
+ofDir='';
 
 % ==== Circle In Circle ==== %
-mainDir='/run/papers/consistentFsiRBF/consistent/circleInCircle/U10/';
+mainDir='';
 
 %% All runs
 
-% ==== bdf 1, bdf 2, bdf 3 ==== %
-% nomovingMesh4
-% cases={'nomovingMesh4','nomovingMesh4','nomovingMesh4'};
+cases={'moving/movingBody','moving/movingBody','moving/movingBody'};
+schemes={'bdf1','bdf2','bdf3'};
+legendNames={'bdf1','bdf2','bdf3'};
+
+% cases={'moving/expandingRotating','moving/expandingRotating','moving/expandingRotating'};
 % schemes={'bdf1','bdf2','bdf3'};
 % legendNames={'bdf1','bdf2','bdf3'};
 
-% ExpandingRotatingMesh
-% cases={'expandingRotatingMesh4_20','expandingRotatingMesh4_20','expandingRotatingMesh4_20'};
-% schemes={'bdf1','bdf2','bdf3'};
-% legendNames={'bdf1','bdf2','bdf3'};
+% cases={'relaxation/static_rel0.9','relaxation/static'};
+% schemes={'bdf3','bdf3'};
+% legendNames={'bdf3-rel0.9','bdf3'};
 
-% movingBodyMesh
-% cases={'movingBodyMesh4','movingBodyMesh4','movingBodyMesh4'};
-% schemes={'bdf1','bdf2','bdf3'};
-% legendNames={'bdf1','bdf2','bdf3'};
+% cases={'relaxation/fsiBody3_rel0.9','relaxation/fsiBody3'};
+% schemes={'bdf3','bdf3'};
+% legendNames={'bdf3-rel0.9','bdf3'};
 
-% FSI Order standard
-% cases={'fsiBody3Mesh4_BDF1','fsiBody3Mesh4_RK4-4','fsiBody3Mesh4_BDF2','fsiBody3Mesh4_BDF3'};
-% schemes={'bdf1','bdf2','bdf2','bdf3'};
-% legendNames={'bdf1','RK4 F(t^{n}+k\Deltat)','bdf2','bdf3'};
-
-% ==== RK FSI ==== %
-% rotatingMesh
-% cases={'rotatingMesh4_20','rotatingMesh4_20','rotatingMesh4_20'};
-% schemes={'bdf2nor','bdf2area','bdf2'};
-% legendNames={'bdf2_{nor}','bdf2_{area}','bdf2'};
-
-% expandingMesh
-% cases={'expandingMesh4','expandingMesh4','expandingMesh4'};
-% schemes={'bdf2nor','bdf2area','bdf2'};
-% legendNames={'bdf2_{nor}','bdf2_{area}','bdf2'};
-
-% RK interpolation for rigid body
-% cases={'fsiBody3Mesh4_RK4-1','fsiBody3Mesh4_RK4-2','fsiBody3Mesh4_RK4-4','fsiBody3Mesh4_BDF2'};
-% schemes={'bdf2','bdf2','bdf2','bdf2'};
-% legendNames={'RK4 F(t^{n+1})','RK4 F(t^{n+1/2})','RK4 F(t^{n}+k\Deltat)','BDF2'};
-
-% ==== Relaxation & Unstructured ==== %
-% cases={'fsiBody3Mesh4_BDF1_rel0.9-n','fsiBody3Mesh4_BDF2_rel0.9-n','fsiBody3Mesh4_BDF3_rel0.9-n','fsiBody3Mesh4_BDF3'};
-% schemes={'bdf1','bdf2','bdf3','bdf3'};
-% legendNames={'bdf1 relax 0.9','bdf2 relax 0.9','bdf3 relax 0.9','bdf3'};
-
-cases={'fsiBody3MeshUn4_BDF3_rel0.99-n2','fsiBody3Mesh4_BDF3_rel0.9-n2'};
-schemes={'bdf3','bdf3'};
-legendNames={'bdf3','bdf3 unstructured'};
-
-%% Extra
-% cases={'nomovingMesh_rel0.9-n','nomovingMesh_rel0.9-n','nomovingMesh_rel0.9-n','nomovingMesh'};
-% schemes={'bdf1','bdf2','bdf3','bdf3'};
-% legendNames={'bdf 1','bdf 2','bdf 3','bdf 3'};
-
-% cases={'nomovingMesh_rel0.9','nomovingMesh_rel0.9','nomovingMesh_rel0.9','nomovingMesh'};
-% schemes={'bdf1','bdf2','bdf3','bdf3'};
-% legendNames={'bdf 1','bdf 2','bdf 3','bdf 3'};
-
-% cases={'fsiBodyMeshUn4_BDF3','fsiBodyMeshUn4_BDF3','fsiBodyMeshUn4_BDF3'};
-% cases={'fsiBodyMesh4_BDF3_rel0.9-n','fsiBodyMesh4_BDF3_rel0.9-n','fsiBodyMesh4_BDF3_rel0.9-n'};
-% schemes={'bdf1','bdf2','bdf3'};
-% legendNames={'bdf 1','bdf 2','bdf 3'};
-
-% cases={'fsiBody3Mesh_BDF1','fsiBody3Mesh_BDF2','fsiBody3Mesh_RK4-4','fsiBody3Mesh_BDF3'};
-% schemes={'bdf1','bdf2','bdf2','bdf3'};
-% legendNames={'bdf^1','bdf^2','RK4 F(t^{n}+k\Deltat)','bdf^3'};
-
-% cases={'fsiBody3Mesh4_BDF3_rel0.9-n'};
-% schemes={'bdf3'};
-% legendNames={'bdf^3_{rel0.9}'};
 
 %% Options
 % Set characteristics
 setName='cellSet_convergenceSet';
-lastSchemeRef=0;
+lastSchemeRef=1;
 
 velocity=1;
 pressure=1;
 normN=Inf;
-writeFigure=1;
-orderlines=[2,3];
+writeFigure=0;
+orderlines=[1,2,3];
 
 xlimits=[3e-4,5e-2];
 

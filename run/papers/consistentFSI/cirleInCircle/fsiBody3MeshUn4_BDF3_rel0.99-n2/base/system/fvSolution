@@ -42,20 +42,13 @@ PIMPLE
 
     nOuterCorrectors 200;
     nCorrectors     10;
-    nNonOrthogonalCorrectors 1;
+    nNonOrthogonalCorrectors 0;
 
     pRefCell		0;
     pRefValue       0;
 
-    outerConvergence 1e-9;
-    innerConvergence 0;
+    momentumTolerance 1e-9;
+    innerTolerance 0;
 }
-
-relaxationFactors
-{
-    p 0.99;
-    U 0.99;
-}
-
 
 // ************************************************************************* //

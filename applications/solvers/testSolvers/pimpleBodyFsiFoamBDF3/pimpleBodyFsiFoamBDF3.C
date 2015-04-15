@@ -65,7 +65,6 @@ int main(int argc, char *argv[])
         // New time
         runTime++;
 
-#       include "updateV000.H"
         Info<< "Time = " << runTime.timeName() << nl << endl;
 
         //Update old values because new time step
