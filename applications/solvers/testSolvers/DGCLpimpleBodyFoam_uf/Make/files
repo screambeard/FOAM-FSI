@@ -1,3 +1,0 @@
-DGCLpimpleBodyFoam_uf.C
-
-EXE = $(FOAM_USER_APPBIN)/DGCLpimpleBodyFoam_uf

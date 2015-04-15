@@ -1,3 +1,0 @@
-pimpleFoamRC_res.C
-
-EXE = $(FOAM_USER_APPBIN)/pimpleFoamRC_res

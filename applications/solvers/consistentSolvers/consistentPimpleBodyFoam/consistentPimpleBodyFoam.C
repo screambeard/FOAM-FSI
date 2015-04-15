@@ -37,21 +37,19 @@ Description
 #include "singlePhaseTransportModel.H"
 #include "turbulenceModel.H"
 #include "dynamicFvMesh.H"
+#include "bodyCollector.H"
 #include "RBFMotionSolverExt.H"
-#include "RBFInterpolationReduced.H"
-#include "mathematicalConstants.H"
-#include "scalarSquareMatrix.H"
-#include "LUscalarMatrix.H"
+
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 int main(int argc, char *argv[])
 {
 #   include "setRootCase.H"
 #   include "createTime.H"
-#   include "createMesh.H"
+#   include "createDynamicFvMesh.H"
 #   include "createFields.H"
 #   include "initContinuityErrs.H"
-#   include "readDynamicMeshProperties.H"
+#   include "readBodyProperties.H"//Reading body properties
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
@@ -65,13 +63,14 @@ int main(int argc, char *argv[])
 
         fvc::makeAbsolute(phi, U);
 
-#       include "updateV000.H"
-
         runTime++;
 
         Info<< "Time = " << runTime.timeName() << nl << endl;
-#       include "setMotion.H"
-#       include "updateSf.H"
+
+        //Get motion of bodies and update mesh accordingly
+        bodyCol.update();
+        ms.setMotion(bodyCol.getPatchMotion());
+        bool meshChanged = mesh.update();
 
         if (correctPhi && (mesh.moving() || meshChanged))
         {
@@ -119,6 +118,8 @@ int main(int argc, char *argv[])
         fvc::makeRelative(phi, U);
 
         runTime.write();
+        //Write bodyMotion properties to file (if requested)
+		bodyCol.write();
 
         Info<< "ExecutionTime = " << runTime.elapsedCpuTime() << " s"
             << "  ClockTime = " << runTime.elapsedClockTime() << " s"

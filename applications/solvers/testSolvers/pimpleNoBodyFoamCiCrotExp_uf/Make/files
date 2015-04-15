@@ -1,3 +1,0 @@
-pimpleNoBodyFoamCiCrotExp_uf.C
-
-EXE = $(FOAM_USER_APPBIN)/pimpleNoBodyFoamCiCrotExp_uf

@@ -1,3 +1,0 @@
-pimpleNoBodyFoamCiC.C
-
-EXE = $(FOAM_USER_APPBIN)/pimpleNoBodyFoamCiC

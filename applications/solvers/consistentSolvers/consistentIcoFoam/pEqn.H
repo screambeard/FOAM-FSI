@@ -1,10 +1,10 @@
-HU = UEqn().H();
-AU = UEqn().A();
+volVectorField HU = UEqn.H();
+volScalarField AU = UEqn.A();
 U = HU/AU;
 
 #include "calcPhi.H"
 
-//adjustPhi(phi, U, p);
+adjustPhi(phi, U, p);
 
 for (int nonOrth=0; nonOrth<=nNonOrthCorr; nonOrth++)
 {
@@ -15,7 +15,7 @@ for (int nonOrth=0; nonOrth<=nNonOrthCorr; nonOrth++)
 
     pEqn.setReference(pRefCell, pRefValue);
     innerResidual = pEqn.solve().initialResidual();
-    
+
     if(nonOrth==0 && corr==0){
         residualPressure = innerResidual;
     }
@@ -26,9 +26,8 @@ for (int nonOrth=0; nonOrth<=nNonOrthCorr; nonOrth++)
     }
 }
 
-p.relax();
+#include "continuityErrs.H"
 
-// Make the fluxes relative to the mesh motion
-fvc::makeRelative(phi, U);
+//U -= rUA*fvc::grad(p);
 U -= (1.0/AU)*fvc::grad(p);
 U.correctBoundaryConditions();

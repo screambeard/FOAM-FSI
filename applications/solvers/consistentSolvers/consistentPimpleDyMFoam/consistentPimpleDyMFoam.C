@@ -37,21 +37,16 @@ Description
 #include "singlePhaseTransportModel.H"
 #include "turbulenceModel.H"
 #include "dynamicFvMesh.H"
-#include "RBFMotionSolverExt.H"
-#include "RBFInterpolationReduced.H"
-#include "mathematicalConstants.H"
-#include "scalarSquareMatrix.H"
-#include "LUscalarMatrix.H"
+
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 int main(int argc, char *argv[])
 {
 #   include "setRootCase.H"
 #   include "createTime.H"
-#   include "createMesh.H"
+#   include "createDynamicFvMesh.H"
 #   include "createFields.H"
 #   include "initContinuityErrs.H"
-#   include "readDynamicMeshProperties.H"
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
@@ -63,15 +58,14 @@ int main(int argc, char *argv[])
 #       include "CourantNo.H"
 #       include "setDeltaT.H"
 
+        // Make the fluxes absolute
         fvc::makeAbsolute(phi, U);
-
-#       include "updateV000.H"
 
         runTime++;
 
         Info<< "Time = " << runTime.timeName() << nl << endl;
-#       include "setMotion.H"
-#       include "updateSf.H"
+
+        bool meshChanged = mesh.update();
 
         if (correctPhi && (mesh.moving() || meshChanged))
         {
@@ -80,6 +74,7 @@ int main(int argc, char *argv[])
 
         // Make the fluxes relative to the mesh motion
         fvc::makeRelative(phi, U);
+
         if (mesh.moving() && checkMeshCourantNo)
         {
 #           include "meshCourantNo.H"

@@ -23,25 +23,19 @@ License
     Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 
 Application
-    pimpleDyMFoam.C
+    icoFoam
 
 Description
-    Transient solver for incompressible, flow of Newtonian fluids
-    on a moving mesh using the PIMPLE (merged PISO-SIMPLE) algorithm.
+    Consistent transient solver for incompressible, laminar flow of Newtonian fluids.
+    With automatic outer and inner loop corrections.
 
-    Turbulence modelling is generic, i.e. laminar, RAS or LES may be selected.
+    By: Thijs Gillebaart, thijsgillebaart@gmail.com
+
 
 \*---------------------------------------------------------------------------*/
 
 #include "fvCFD.H"
-#include "singlePhaseTransportModel.H"
-#include "turbulenceModel.H"
-#include "dynamicFvMesh.H"
-#include "RBFMotionSolverExt.H"
-#include "RBFInterpolationReduced.H"
-#include "mathematicalConstants.H"
-#include "scalarSquareMatrix.H"
-#include "LUscalarMatrix.H"
+
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 int main(int argc, char *argv[])
@@ -51,72 +45,41 @@ int main(int argc, char *argv[])
 #   include "createMesh.H"
 #   include "createFields.H"
 #   include "initContinuityErrs.H"
-#   include "readDynamicMeshProperties.H"
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
     Info<< "\nStarting time loop\n" << endl;
 
-    while (runTime.run())
+    while (runTime.loop())
     {
-#       include "readControls.H"
+        Info<< "Time = " << runTime.timeName() << nl << endl;
+
+#   	include "readTimeControls.H"
+#   	include "readAutoPISOControls.H"
 #       include "CourantNo.H"
 #       include "setDeltaT.H"
-
-        fvc::makeAbsolute(phi, U);
-
-#       include "updateV000.H"
-
-        runTime++;
-
-        Info<< "Time = " << runTime.timeName() << nl << endl;
-#       include "setMotion.H"
-#       include "updateSf.H"
-
-        if (correctPhi && (mesh.moving() || meshChanged))
-        {
-#           include "correctPhi.H"
-        }
-
-        // Make the fluxes relative to the mesh motion
-        fvc::makeRelative(phi, U);
-        if (mesh.moving() && checkMeshCourantNo)
-        {
-#           include "meshCourantNo.H"
-        }
 
         label oCorr=0;
         do
         {
             Info << "outer iteration: " << oCorr+1 << endl;
 
-            U.storePrevIter();
+            //Solve momentum equation
 #           include "UEqn.H"
 
             // --- PISO loop
             label corr=0;
             do
             {
-                p.storePrevIter();
 #               include "pEqn.H"
                 corr++;
-            }while(innerResidual > innerTolerance && corr < nCorr);
-
-#           include "movingMeshContinuityErrs.H"
-
-            //Correct turbulence
-            turbulence->correct();
+            }while(innerResidual > innerTolerance && corr < nCorr);for (int corr=0; corr<nCorr; corr++)
 
             //Check convergence
-#           include "checkPIMPLEResidualConvergence.H"
+            #include "checkPISOResidualConvergence.H"
 
             oCorr++;
         }while(!outerLoopConverged);
-
-        //Update the face velocities
-        fvc::makeAbsolute(phi, U);
-#       include "updateUf.H"
-        fvc::makeRelative(phi, U);
 
         runTime.write();
 

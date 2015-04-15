@@ -1,11 +1,7 @@
 #!/bin/sh
 cd ${0%/*} || exit 1    # run from this directory
 
-wmake correctRhieChowSolvers/pimpleFoamRC
-wmake correctRhieChowSolvers/pimpleDyMFoamRC
-wmake correctRhieChowSolvers/pimpleBodyFoamRC
-wmake correctRhieChowSolvers/icoFoamRC
-wmake correctRhieChowSolvers/simpleFoamRC
+wmake all consistentSolvers
 
 # FSI
 wmake fsi/bodyMotionFoam

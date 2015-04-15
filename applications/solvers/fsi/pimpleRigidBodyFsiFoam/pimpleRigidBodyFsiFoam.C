@@ -23,102 +23,74 @@ License
     Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 
 Application
-    pimpleDyMFoam.C
+    icoFoam
 
 Description
-    Transient solver for incompressible, flow of Newtonian fluids
-    on a moving mesh using the PIMPLE (merged PISO-SIMPLE) algorithm.
-
-    Turbulence modelling is generic, i.e. laminar, RAS or LES may be selected.
+    Transient solver for incompressible, laminar flow of Newtonian fluids with
+    mesh motion.  Set up as a fake fluid structure interaction solver
 
 \*---------------------------------------------------------------------------*/
 
 #include "fvCFD.H"
 #include "singlePhaseTransportModel.H"
 #include "turbulenceModel.H"
-#include "dynamicFvMesh.H"
-#include "RBFMotionSolverExt.H"
-#include "RBFInterpolationReduced.H"
-#include "mathematicalConstants.H"
-#include "scalarSquareMatrix.H"
-#include "LUscalarMatrix.H"
+#include "fsiInterface.H"
+#include "rigidBody.H"
+#include "transformField.H"
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 int main(int argc, char *argv[])
 {
-#   include "setRootCase.H"
-#   include "createTime.H"
-#   include "createMesh.H"
-#   include "createFields.H"
-#   include "initContinuityErrs.H"
-#   include "readDynamicMeshProperties.H"
-
+#   include "setRootCase.H"//Set location of case
+#   include "createTime.H"//Create runtime environment
+#   include "createMesh.H"//Create dynamic fluid mesh
+#   include "createFields.H"//Create fluid fields for incompressible flow & read (constant) density (rhoFluid)
+#   include "initContinuityErrs.H"//Initialize continuity error calculations
+#   include "readRigidBodyProperties.H"//Reading body properties: spring stifnesses, mass properties, cg, rc
+#   include "readCouplingProperties.H"//Read coupling patches solid and fluid. Construct interpolators (fluid-solid, solid-fluid), mesh motion object (tForce, motionUFluidPatch, tppi)
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
     Info<< "\nStarting time loop\n" << endl;
 
     while (runTime.run())
     {
-#       include "readControls.H"
-#       include "CourantNo.H"
-#       include "setDeltaT.H"
+#       include "readControls.H"//Read PISO control every new time step
+#       include "CourantNo.H"//Calculate Co
+#       include "setDeltaT.H"//Set dT according to Co if requested
 
-        fvc::makeAbsolute(phi, U);
-
-#       include "updateV000.H"
-
+        // New time
         runTime++;
-
         Info<< "Time = " << runTime.timeName() << nl << endl;
-#       include "setMotion.H"
-#       include "updateSf.H"
 
-        if (correctPhi && (mesh.moving() || meshChanged))
-        {
-#           include "correctPhi.H"
-        }
+        //Update rigid body
+        rb.update();
 
-        // Make the fluxes relative to the mesh motion
-        fvc::makeRelative(phi, U);
-        if (mesh.moving() && checkMeshCourantNo)
-        {
-#           include "meshCourantNo.H"
-        }
+		//Re-initialize variables each time step
+		fsiInter.reset();
 
-        label oCorr=0;
-        do
-        {
-            Info << "outer iteration: " << oCorr+1 << endl;
+		do{
+        	Info<< "Fsi iteration = " << fsiInter.iter() << endl;
 
-            U.storePrevIter();
-#           include "UEqn.H"
+#           include "setMotion.H"
 
-            // --- PISO loop
-            label corr=0;
-            do
-            {
-                p.storePrevIter();
-#               include "pEqn.H"
-                corr++;
-            }while(innerResidual > innerTolerance && corr < nCorr);
+#           include "solveFluid.H"
 
-#           include "movingMeshContinuityErrs.H"
+			fsiInter.update(rhoFluid,nu,U,p);
+		}while(!fsiInter.converged());
 
-            //Correct turbulence
-            turbulence->correct();
+		Info << "Number of fsi coupling iterations needed: " << fsiInter.iter() << endl;
 
-            //Check convergence
-#           include "checkPIMPLEResidualConvergence.H"
-
-            oCorr++;
-        }while(!outerLoopConverged);
-
-        //Update the face velocities
+        //Update the face velocities for next time step
         fvc::makeAbsolute(phi, U);
 #       include "updateUf.H"
         fvc::makeRelative(phi, U);
 
+		//Writing data
         runTime.write();
+        //Write bodyMotion properties to file (if requested)
+		rb.write();
+		//Write fsi properties to file (if requested)
+		fsiInter.write();
 
         Info<< "ExecutionTime = " << runTime.elapsedCpuTime() << " s"
             << "  ClockTime = " << runTime.elapsedClockTime() << " s"
@@ -127,8 +99,8 @@ int main(int argc, char *argv[])
 
     Info<< "End\n" << endl;
 
-    return 0;
-}
+    return(0);
+}}
 
 
 // ************************************************************************* //
