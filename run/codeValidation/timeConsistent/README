@@ -1,0 +1,18 @@
+These cases are for validation of time consistency in foam-extend-3.1 with the new solver setup and new schemes (bdf1, bdf2, bdf3)
+
+static:
+    Case where mesh is static.
+
+moving:
+    Cases where the mesh is moving, which requires the new Uf variable to be present in the solver (such that is can be used by the ddtSchemes).
+    expandingRotatingMesh:
+        Case where rotation (of the whole mesh) and expansion of the mesh can be controlled and tested. Done such that bdf2area and bdf2nor can be tested. Purely done for analysis.
+    movingBody:
+        Case where the inner body is moving by a prescribed motion. Deformation is done by RBF.
+
+fsi:
+    Case where a (non-linear) 3DoF rigid body is used and coupled to the fluid solver.
+
+relaxation:
+    Cases where it is shown that with under-relaxation still time consistency can be achieved and the solution is independent of the relaxation factor (when converged).
+    For the static cases also the "old" approach is given, with the old solver, to show what happened when relaxation influenced the order.

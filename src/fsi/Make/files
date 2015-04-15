@@ -1,32 +1,6 @@
-FsiSolver.C
-RelativeConvergenceMeasure.C
-MinIterationConvergenceMeasure.C
-ManifoldMapping.C
-MultiLevelSolver.C
-SpaceMappingSolver.C
-MultiLevelFsiSolver.C
-ImplicitMultiLevelFsiSolver.C
-MultiLevelSpaceMappingSolver.C
-MLIQNILSSolver.C
-OutputSpaceMapping.C
-SpaceMapping.C
-PostProcessing.C
-AggressiveSpaceMapping.C
-BroydenPostProcessing.C
-ASMILS.C
-AitkenPostProcessing.C
-DataValues.C
-IDWInterpolation.C
-AndersonPostProcessing.C
-SDC.C
+fsiInterface = fsiInterface
+$(fsiInterface)/fsiInterface.C
 
-fluidSolvers/CoupledFluidSolver.C
-fluidSolvers/FluidSolver.C
-fluidSolvers/foamFluidSolver.C
-fluidSolvers/CompressibleFluidSolver.C
-fluidSolvers/SDCFluidSolver.C
-
-solidSolvers/foamSolidSolver.C
-solidSolvers/SolidSolver.C
+aeroForces/aeroForces.C
 
 LIB = $(FOAM_USER_LIBBIN)/libfsi

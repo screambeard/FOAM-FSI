@@ -1,0 +1,13 @@
+#!/bin/sh
+#make sure to run from this dir
+cd ${0%/*} || exit 1
+
+# Source tutorial run functions
+. $WM_PROJECT_DIR/bin/tools/RunFunctions
+
+# Get application name from directory
+application="pimpleFoamRC_old"
+
+cellSet
+runApplication $application
+writeSets

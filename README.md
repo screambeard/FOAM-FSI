@@ -1,50 +1,24 @@
-FOAM-FSI
+FOAM-FSI_oldSchool-thijs
 ========
 
-Features
------------
+Is a branch of original start of Thijs Gillebaart his contributions to FOAM-FSI.
+This branch holds all of the code at the start, including unfinished not ideal parts.
 
-* Partitioned Fluid-Structure Interaction solvers build with standard foam-extend fluid and solid solvers.
-* Algorithms for strongly coupled FSI: Aitken under relaxation, IQN-ILS or Anderson acceleration, manifold mapping acceleration, and space mapping acceleration.
-* Consistent first and second order time integration schemes for incompressible flow, structural dynamics and FSI.
-* Efficient implementation of mesh motion solver based on radial basis function interpolation.
-* Run fluid-structure-acoustics simulations with the coupling tool preCICE.
-* Block-coupled transient incompressible flow solver.
-* Arbitrary high order time discretization for incompressible flow solver based on the PISO algorithm.
-
-Installation
------------
+See master branch for latest update on this.
 
 First, compile foam-extend-3.1, the nextRelease branch.
 
 To compile the FSI library:
 
 ``` bash
-git clone https://github.com/davidsblom/FOAM-FSI.git
-cd FOAM-FSI/src/thirdParty
+cd src/
 ./Allmake
-cd ../../
+cd ../applications/solvers
 ./Allwmake
+cd ../applications/utilities
 ```
 
 Prerequisites
 -----------
 
 gcc 4.8 or higher due to C++11 features.
-
-Test suite
------------
-
-A test suite is available implementing a large number of unit and functional tests within the googletest framework. In case you run into problems with the FSI solver, preferably run the test suite and attach a log of the test results to your bug report.
-To run the test suite:
-``` bash
-tests
-```
-
-Credits
------------
-
-The FOAM-FSI project has been started by David Blom. Many other people have also contributed. Here is an alphabetical list:
-
-Philip Cardiff  
-Thijs Gillebaart

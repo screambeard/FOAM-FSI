@@ -1,0 +1,7 @@
+rigidBody/rigidBody.C
+rigidBody/newrigidBody.C
+oneDoFRigidBody/oneDoFRigidBody.C
+twoDoFRigidBody/twoDoFRigidBody.C
+twoDoFRigidBody2Masses/twoDoFRigidBody2Masses.C
+
+LIB = $(FOAM_USER_LIBBIN)/librigidBody

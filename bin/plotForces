@@ -1,0 +1,28 @@
+#!/bin/bash
+
+#script location
+DIR="$(cd "$(dirname "$0")" && pwd)"
+scriptName="plotForces.gnuplot"
+scriptDir=$DIR"/"$scriptName
+
+#os determination
+platform='unknown'
+unamestr=`uname`
+
+#check log argument
+re='^-?[0-9]+([.][0-9]+)?$'
+if [ "$#" -eq 2 ]; then
+    if ! [[ $1 =~ $re ]] ; then
+           echo "error: Argument 1 is not a number" >&2; exit 1
+    fi
+    if ! [[ $2 =~ $re ]] ; then
+           echo "error: Argument 2 is not a number" >&2; exit 1
+    fi
+
+    sed -i "s/set yr .*/set yr [$1:$2]/g" ${scriptDir}
+fi
+
+echo "Plotting forces"
+gnuplot $scriptDir
+
+sed -i "s/set yr .*/set yr [:]/g" ${scriptDir}

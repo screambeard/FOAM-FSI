@@ -1,4 +1,0 @@
-PreciceSolidSolver.C
-fsiSolidFoam.C
-
-EXE = $(FOAM_USER_APPBIN)/fsiSolidFoam

@@ -1,0 +1,10 @@
+gust/gust.C
+gust/newGust.C
+constantUniform/constantUniform.C
+cosineUniform/cosineUniform.C
+mexicanUniform/mexicanUniform.C
+travelingGust/travelingGust.C
+travelingVortex/travelingVortex.C
+
+
+LIB = $(FOAM_USER_LIBBIN)/libgusts

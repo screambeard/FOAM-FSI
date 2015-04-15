@@ -2,6 +2,8 @@
 
 set -e
 
+find . -name '*~' -exec rm -rf {} \;
+
 # Define which versions of the different packages are used
 
 export BOOST_VERSION=1_53_0
@@ -18,7 +20,7 @@ rm -rf precice
 
 # Unpack third party packages
 
-tar jxfv boost_${BOOST_VERSION}.tar.bz2
+tar jxf boost_${BOOST_VERSION}.tar.bz2
 
 rm -f boost_${BOOST_VERSION}.tar.bz2
 
@@ -35,5 +37,5 @@ export PRECICE_MPI_INC_PATH=${MPI_HOME}/include
 git clone git@vmbungartz6.informatik.tu-muenchen.de:gatzhamm/precice.git
 cd precice
 git checkout develop
-scons -j 4 build=debug python=off petsc=off
 scons -j 4 build=release python=off petsc=off
+scons -j 4 build=debug python=off petsc=off

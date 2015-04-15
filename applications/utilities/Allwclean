@@ -1,0 +1,16 @@
+#! /bin/bash
+cd ${0%/*} || exit 1    # run from this directory
+
+wclean addInitialRandomVelocity
+wclean createPerfectCirclePatches
+wclean mapFields
+wclean myR
+wclean refineMeshMultipleLevels
+wclean sample
+wclean setInitialVortex
+wclean setTaylorGreenVortex
+wclean skinFriction
+wclean vorticityGust
+wclean writePatchCoordinates
+wclean writeSets
+wclean yPlusUplus/yPlusCFD

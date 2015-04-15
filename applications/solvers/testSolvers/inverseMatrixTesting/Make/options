@@ -1,0 +1,9 @@
+EXE_INC = -std=c++0x \
+    -I$(LIB_SRC)/finiteVolume/lnInclude \
+    -I$(WM_PROJECT_USER_DIR)/src/thirdparty/eigen \
+    -I$(WM_PROJECT_USER_DIR)/src/RBFMeshMotionSolver/lnInclude
+
+EXE_LIBS = \
+    -L$(FOAM_USER_LIBBIN) \
+    -lfiniteVolume \
+    -lRBFMeshMotionSolver

@@ -1,0 +1,30 @@
+#! /bin/bash
+
+cd ${0%/*} || exit 1    # run from this directory
+
+wclean correctRhieChowSolvers/pimpleFoamRC
+wclean correctRhieChowSolvers/pimpleDyMFoamRC
+wclean correctRhieChowSolvers/pimpleBodyFoamRC
+wclean correctRhieChowSolvers/icoFoamRC
+wclean correctRhieChowSolvers/simpleFoamRC
+
+# FSI
+wclean fsi/bodyMotionFoam
+wclean fsi/pimpleBodyFsiFoamRC
+wclean fsi/pimpleBodyFsiGustFoam
+wclean fsi/simpleBodyFsiFoam
+
+# Gusts
+wclean gust/pimpleBodyGustFoamRC/
+wclean gust/pimpleGustFoam
+
+# Coupled
+wclean coupled/pUCoupledFoam
+wclean coupled/unsteadyPUCoupledFoam
+
+# Remaining solver
+wclean movingMesh/moveBodyFoam
+wclean movingMesh/myMoveDynamicMesh
+wclean simpleFoamChannel
+wclean simpleSRFAbsFoam
+wclean simpleSRFAbsFoamRC

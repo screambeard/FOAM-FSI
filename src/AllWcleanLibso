@@ -1,0 +1,11 @@
+#!/bin/sh
+
+wclean mySchemes
+wclean myBoundaries
+wclean fsi
+wclean gusts
+wclean RBFmeshInterpolation
+wclean bodyMotion
+wclean mySolidBodyMotion
+wclean myTurbulenceModels
+wclean SRFModelAbs

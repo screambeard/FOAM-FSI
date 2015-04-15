@@ -1,3 +1,9 @@
+# OpenFOAM
+*.dep
+darwinIntel64GccDPOpt
+linux64GccDPOpt
+lnInclude
+
 # Compiled Object files
 *.slo
 *.lo
@@ -21,17 +27,3 @@
 *.out
 *.app
 
-# OpenFOAM
-lnInclude
-linux64GccDPOpt
-darwinIntel64GccDPOpt
-
-# Specific files
-*.log
-formatCode
-uncrustify.cfg
-runTests.sh
-src/thirdParty/boost*
-src/thirdParty/gtest*
-src/thirdParty/precice
-src/thirdParty/yaml-cpp*

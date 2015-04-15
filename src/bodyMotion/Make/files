@@ -1,0 +1,21 @@
+bodyCollector/bodyCollector.C
+
+bodyMotionFunction/bodyMotionFunction/bodyMotionFunction.C
+bodyMotionFunction/bodyMotionFunction/newbodyMotionFunction.C
+bodyMotionFunction/twodRigidBody/twodRigidBody.C
+bodyMotionFunction/twodTwoHingeFlap/twodTwoHingeFlap.C
+bodyMotionFunction/turekForced/turekForced.C
+bodyMotionFunction/larsFlap/larsFlap.C
+bodyMotionFunction/beamForced/beamForced.C
+
+fsiBodies=bodyMotionFunction/fsiBodies
+$(fsiBodies)/ThreeDoFRigidBody/ThreeDoFRigidBody.C
+$(fsiBodies)/oneDoFRigidBody/oneDoFRigidBody.C
+$(fsiBodies)/ThreeDoFRigidBodyControlledFlap/ThreeDoFRigidBodyControlledFlap.C
+$(fsiBodies)/ThreeDoFRigidBodyControlledFlapLars/ThreeDoFRigidBodyControlledFlapLars.C
+$(fsiBodies)/dummyFsiBody/dummyFsiBody.C
+
+controlledBodies=bodyMotionFunction/controlledBodies
+$(controlledBodies)/twodTwoHingeFlapControlled/twodTwoHingeFlapControlled.C
+
+LIB = $(FOAM_USER_LIBBIN)/libbodyMotion

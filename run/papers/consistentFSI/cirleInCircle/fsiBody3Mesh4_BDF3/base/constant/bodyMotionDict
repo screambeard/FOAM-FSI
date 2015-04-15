@@ -1,0 +1,41 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM Extend Project: Open Source CFD        |
+|  \\    /   O peration     | Version:  1.6-ext                               |
+|   \\  /    A nd           | Web:      www.extend-project.de                 |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      bodyMotionDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+bodyMotions ( block );
+
+blockDict
+{
+    type ThreeDoFRigidBody;
+    patches (inside);
+
+    integrationScheme BDF3;
+
+    k (4 4 0);
+    ktheta 4;
+    c (0 0 0);
+    ctheta 0;
+    m 1;//5;
+    Lcg2rc 0.01;
+    Icg 0.05;
+    rc (0 0.1 0.5);
+    thetaGeom 0;
+
+    initialState (0 0 0);
+    initialStateVelocity (0 0 0);
+
+    write true;
+}
+// ************************************************************************* //

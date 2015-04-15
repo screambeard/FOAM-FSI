@@ -1,0 +1,45 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM Extend Project: Open source CFD        |
+|  \\    /   O peration     | Version:  1.6-ext                               |
+|   \\  /    A nd           | Web:      www.extend-project.de                 |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      cellSetDict;
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// Name of set to operate on
+names (box1 box2);
+
+// One of clear/new/invert/add/delete|subset/list
+actions (new new);
+
+// Actions to apply to cellSet. These are all the topoSetSource's ending
+// in ..ToCell (see the meshTools library).
+
+box1Dict
+(
+    // Cells with cell centre within box
+    boxToCell
+    {
+       box   (-0.3 -0.25 0) (1.3 0.3 1);
+    }
+);
+
+box2Dict
+(
+    // Cells with cell centre within box
+    boxToCell
+    {
+       box   (-0.6 -0.6 0) (1.6 0.6 1);
+    }
+);
+
+// ************************************************************************* //

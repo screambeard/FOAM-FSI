@@ -1,0 +1,30 @@
+#!/bin/sh
+cd ${0%/*} || exit 1    # run from this directory
+
+wmake correctRhieChowSolvers/pimpleFoamRC
+wmake correctRhieChowSolvers/pimpleDyMFoamRC
+wmake correctRhieChowSolvers/pimpleBodyFoamRC
+wmake correctRhieChowSolvers/icoFoamRC
+wmake correctRhieChowSolvers/simpleFoamRC
+
+# FSI
+wmake fsi/bodyMotionFoam
+wmake fsi/pimpleBodyFsiFoamRC
+wmake fsi/pimpleRigidBodyFsiFoamRC
+wmake fsi/pimpleBodyFsiGustFoam
+wmake fsi/simpleBodyFsiFoam
+
+# Gusts
+wmake gust/pimpleBodyGustFoamRC
+wmake gust/pimpleGustFoam
+
+# Coupled
+wmake coupled/pUCoupledFoam
+wmake coupled/unsteadyPUCoupledFoam
+
+# Remaining solver
+wmake movingMesh/moveBodyFoam
+wmake movingMesh/myMoveDynamicMesh
+wmake simpleFoamChannel
+wmake simpleSRFAbsFoamRC
+wmake simpleSRFAbsFoam

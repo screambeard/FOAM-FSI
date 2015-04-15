@@ -1,0 +1,16 @@
+#!/bin/sh
+cd ${0%/*} || exit 1    # run from this directory
+
+wmake addInitialRandomVelocity
+wmake createPerfectCirclePatches
+wmake mapFields
+wmake myR
+wmake refineMeshMultipleLevels
+wmake sample
+wmake setInitialVortex
+wmake setTaylorGreenVortex
+wmake skinFriction
+wmake vorticityGust
+wmake writePatchCoordinates
+wmake writeSets
+wmake yPlusUplus/yPlusCFD

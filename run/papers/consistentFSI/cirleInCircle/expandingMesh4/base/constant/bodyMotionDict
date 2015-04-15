@@ -1,0 +1,33 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM Extend Project: Open Source CFD        |
+|  \\    /   O peration     | Version:  1.6-ext                               |
+|   \\  /    A nd           | Web:      www.extend-project.de                 |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      bodyMotionDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+bodyMotions ( block );
+
+blockDict
+{
+	type twodRigidBody;
+	patches (block);
+
+    translationAmplitude 0.03;
+    translationFrequency 2;
+    translationDirection (0 1 0);
+    rotationAmplitude   -15;
+    rotationFrequency 2;
+    rotationOrigin (0 0 0);
+
+	smoothStart true;
+}
+// ************************************************************************* //

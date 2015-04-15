@@ -1,0 +1,375 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | foam-extend: Open Source CFD                    |
+|  \\    /   O peration     | Version:     3.1                                |
+|   \\  /    A nd           | Web:         http://www.extend-project.de       |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build    : 3.1-be934ff67481
+Exec     : pimpleBodyFsiFoamBDF3
+Date     : Mar 26 2015
+Time     : 18:08:46
+Host     : tud276718
+PID      : 8002
+CtrlDict : /home/thijsgillebaart/foam/foam-extend-3.1/etc/controlDict
+Case     : /media/thijsgillebaart/THIJSDATA/foam/thijsgillebaart-3.1/run/papers/consistentFsiRBF/consistent/circleInCircle/U10/fsiBody3Mesh4_BDF3_rel0.9-n/base
+nProcs   : 1
+SigFpe   : Enabling floating point exception trapping (FOAM_SIGFPE).
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Create dynamic mesh for time = 0
+
+Selecting dynamicFvMesh dynamicMotionSolverFvMesh
+Selecting motion solver: RBFMotionSolverExt
+Radial Basis Function interpolation: Selecting RBF function: TPS
+RBF_ = TPS
+movingPatches (sorted) = 
+1
+(
+inside
+)
+
+movingPatchIDs (sorted) = 1(1)
+
+RBFMotionSolverExt::makeControlIDs()
+This is a 2D case. Only half of the points are used for RBF interpolation.
+
+Mark moving points
+Mark static points
+Number of internalPoints = 6240
+Number of movingPoints = 320
+Number of staticPoints = 320
+Picked static control points: 160 from 320 static points
+Picked moving control points: 160 from 320 moving points
+Number of control points picked: 320
+Number of internal points: 6240
+RBFMotionSolverExt::setMovingControlPointsIDs
+Time before building C: 0.07
+Just doing 2D RBF calulations
+RBFI::Matrix_C -> Constructing matrix C
+Time before solving C: 0.07
+Time before building H: 0.09
+Hred initialized. Size = 998400, memory size = 7MB
+Time after building H: 0.29
+Reading transportProperties
+
+Reading field p
+
+Reading field U
+
+Reading/calculating face flux field phi
+
+Selecting incompressible transport model Newtonian
+Selecting turbulence model type RASModel
+Selecting RAS turbulence model laminar
+Reading field AU if present
+
+Reading field HU if present
+
+Reading solid body properties
+
+
+Reading all bodyMotionFunctions and gathering information
+body motion function: Selecting function: ThreeDoFRigidBody
+Initial state is set to: 6{0}
+bodyCollector found following moving patches: 
+1
+(
+inside
+)
+ with following patchIDs: 1(1)
+
+Reading coupling properties
+FsiInterface uses following patches as interface patches: 1(1)
+
+Starting time loop
+
+Courant Number mean: 0 max: 0 velocity magnitude: 0
+Time = 0.02
+
+Fsi iteration = 0
+
+Gathering motion from bodies based on fluid forces
+Solve Solid block
+totalForces = (0 0 0)
+totalMoments = (0 0 0)
+bodyState = (0 0 0)
+Motion from bodies collected
+
+RBFMovtionSolver::solve()
+Just doing 2D RBF calulations
+volume continuity errors : volume = 3.10937740812, max error = 0, sum local = 0, global = 0
+outer iteration: 1
+BiCGStab:  Solving for Ux, Initial residual = 1, Final residual = 3.34355502429e-11, No Iterations 9
+BiCGStab:  Solving for Uy, Initial residual = 1, Final residual = 4.52429404765e-11, No Iterations 9
+DICPCG:  Solving for p, Initial residual = 1, Final residual = 8.8063545678e-11, No Iterations 143
+DICPCG:  Solving for p, Initial residual = 0.0500364911166, Final residual = 8.50875890205e-11, No Iterations 132
+DICPCG:  Solving for p, Initial residual = 0.201774676645, Final residual = 7.64545733787e-11, No Iterations 134
+DICPCG:  Solving for p, Initial residual = 0.066421291399, Final residual = 8.14435218355e-11, No Iterations 133
+DICPCG:  Solving for p, Initial residual = 0.0663373107953, Final residual = 9.43885420696e-11, No Iterations 130
+DICPCG:  Solving for p, Initial residual = 0.00956140614911, Final residual = 9.07367891024e-11, No Iterations 123
+DICPCG:  Solving for p, Initial residual = 0.0358308942523, Final residual = 7.33200477424e-11, No Iterations 124
+DICPCG:  Solving for p, Initial residual = 0.00117257795643, Final residual = 7.65260578127e-11, No Iterations 118
+DICPCG:  Solving for p, Initial residual = 0.034066169502, Final residual = 7.94356714412e-11, No Iterations 120
+DICPCG:  Solving for p, Initial residual = 0.000196001376415, Final residual = 6.57978422768e-11, No Iterations 111
+residualPressure = 1, residualVelocity = 1
+outer iteration: 2
+BiCGStab:  Solving for Ux, Initial residual = 0.053376279099, Final residual = 3.1483714934e-11, No Iterations 8
+BiCGStab:  Solving for Uy, Initial residual = 0.0520652372546, Final residual = 2.8450403816e-11, No Iterations 8
+DICPCG:  Solving for p, Initial residual = 0.302965409759, Final residual = 8.3877370962e-11, No Iterations 139
+DICPCG:  Solving for p, Initial residual = 0.0342964656714, Final residual = 8.88672418226e-11, No Iterations 131
+DICPCG:  Solving for p, Initial residual = 0.153939264645, Final residual = 7.90017129312e-11, No Iterations 138
+DICPCG:  Solving for p, Initial residual = 0.0350637912169, Final residual = 8.33706304103e-11, No Iterations 129
+DICPCG:  Solving for p, Initial residual = 0.0300145996184, Final residual = 9.67541727523e-11, No Iterations 132
+DICPCG:  Solving for p, Initial residual = 0.00305550966195, Final residual = 9.56541450544e-11, No Iterations 120
+DICPCG:  Solving for p, Initial residual = 0.00686831710133, Final residual = 9.20855436114e-11, No Iterations 122
+DICPCG:  Solving for p, Initial residual = 0.000755066409468, Final residual = 9.64053409151e-11, No Iterations 114
+DICPCG:  Solving for p, Initial residual = 0.009390008322, Final residual = 8.53721341755e-11, No Iterations 124
+DICPCG:  Solving for p, Initial residual = 0.00107591345215, Final residual = 8.32025353068e-11, No Iterations 117
+residualPressure = 1.66042798696, residualVelocity = 0.263018303188
+outer iteration: 3
+BiCGStab:  Solving for Ux, Initial residual = 0.024003766615, Final residual = 1.997074213e-11, No Iterations 7
+BiCGStab:  Solving for Uy, Initial residual = 0.0240755459453, Final residual = 9.68703958088e-11, No Iterations 7
+DICPCG:  Solving for p, Initial residual = 0.159673178665, Final residual = 8.16140346277e-11, No Iterations 137
+DICPCG:  Solving for p, Initial residual = 0.00550800935998, Final residual = 8.75078055898e-11, No Iterations 126
+DICPCG:  Solving for p, Initial residual = 0.0946531462081, Final residual = 8.97253765548e-11, No Iterations 134
+DICPCG:  Solving for p, Initial residual = 0.0035702326177, Final residual = 8.57297060215e-11, No Iterations 122
+DICPCG:  Solving for p, Initial residual = 0.0138391668994, Final residual = 7.91360054414e-11, No Iterations 122
+DICPCG:  Solving for p, Initial residual = 0.000247405440233, Final residual = 7.70325466522e-11, No Iterations 112
+DICPCG:  Solving for p, Initial residual = 0.00222289438705, Final residual = 9.33891653942e-11, No Iterations 118
+DICPCG:  Solving for p, Initial residual = 0.000195533524325, Final residual = 9.9133452508e-11, No Iterations 110
+DICPCG:  Solving for p, Initial residual = 0.00388471705956, Final residual = 9.91025568885e-11, No Iterations 120
+DICPCG:  Solving for p, Initial residual = 0.00023905079587, Final residual = 9.26255252847e-11, No Iterations 111
+residualPressure = 0.366503951329, residualVelocity = 0.13544774158
+outer iteration: 4
+BiCGStab:  Solving for Ux, Initial residual = 0.014411449778, Final residual = 1.25967638216e-11, No Iterations 7
+BiCGStab:  Solving for Uy, Initial residual = 0.0145134480475, Final residual = 1.81448294069e-11, No Iterations 7
+DICPCG:  Solving for p, Initial residual = 0.0781624763818, Final residual = 9.03915838296e-11, No Iterations 134
+DICPCG:  Solving for p, Initial residual = 0.00544740438839, Final residual = 8.35992226716e-11, No Iterations 122
+DICPCG:  Solving for p, Initial residual = 0.0477056177357, Final residual = 8.1697707759e-11, No Iterations 133
+DICPCG:  Solving for p, Initial residual = 0.00354458774981, Final residual = 8.04969331321e-11, No Iterations 121
+DICPCG:  Solving for p, Initial residual = 0.00648878382033, Final residual = 8.23212239586e-11, No Iterations 126
+DICPCG:  Solving for p, Initial residual = 0.000285825181094, Final residual = 8.11552309884e-11, No Iterations 113
+DICPCG:  Solving for p, Initial residual = 0.00114459278414, Final residual = 9.12941643885e-11, No Iterations 115
+DICPCG:  Solving for p, Initial residual = 0.000125128933427, Final residual = 6.90145960075e-11, No Iterations 110
+DICPCG:  Solving for p, Initial residual = 0.00185368201252, Final residual = 9.78567911552e-11, No Iterations 117
+DICPCG:  Solving for p, Initial residual = 0.000163940494288, Final residual = 8.70165713077e-11, No Iterations 110
+residualPressure = 0.404661209715, residualVelocity = 0.0837865217061
+outer iteration: 5
+BiCGStab:  Solving for Ux, Initial residual = 0.00963587386723, Final residual = 2.44639117324e-12, No Iterations 7
+BiCGStab:  Solving for Uy, Initial residual = 0.00975291612128, Final residual = 8.88987107052e-12, No Iterations 7
+DICPCG:  Solving for p, Initial residual = 0.0410387211268, Final residual = 7.53432101378e-11, No Iterations 133
+DICPCG:  Solving for p, Initial residual = 0.00317508621306, Final residual = 7.75077685363e-11, No Iterations 121
+DICPCG:  Solving for p, Initial residual = 0.0255404346659, Final residual = 8.38765456883e-11, No Iterations 131
+DICPCG:  Solving for p, Initial residual = 0.00199016815394, Final residual = 9.76958152542e-11, No Iterations 119
+DICPCG:  Solving for p, Initial residual = 0.00313836812777, Final residual = 8.42053321027e-11, No Iterations 122
+DICPCG:  Solving for p, Initial residual = 0.000157813973626, Final residual = 7.91538494539e-11, No Iterations 111
+DICPCG:  Solving for p, Initial residual = 0.00069635234044, Final residual = 7.66042332959e-11, No Iterations 113
+DICPCG:  Solving for p, Initial residual = 7.55138662653e-05, Final residual = 9.25817107265e-11, No Iterations 108
+DICPCG:  Solving for p, Initial residual = 0.00100916393626, Final residual = 8.97176888758e-11, No Iterations 114
+DICPCG:  Solving for p, Initial residual = 9.79521660333e-05, Final residual = 7.8646053511e-11, No Iterations 109
+residualPressure = 0.302414753901, residualVelocity = 0.0567620984634
+outer iteration: 6
+BiCGStab:  Solving for Ux, Initial residual = 0.00687176835195, Final residual = 9.88953854438e-11, No Iterations 6
+BiCGStab:  Solving for Uy, Initial residual = 0.00697496411832, Final residual = 9.48568186774e-11, No Iterations 6
+DICPCG:  Solving for p, Initial residual = 0.0247494148217, Final residual = 7.44721682518e-11, No Iterations 131
+DICPCG:  Solving for p, Initial residual = 0.00216273177666, Final residual = 7.6619872296e-11, No Iterations 120
+DICPCG:  Solving for p, Initial residual = 0.0150106522475, Final residual = 9.45488577303e-11, No Iterations 128
+DICPCG:  Solving for p, Initial residual = 0.00134856744928, Final residual = 9.67397359266e-11, No Iterations 118
+DICPCG:  Solving for p, Initial residual = 0.00169990559521, Final residual = 8.77497977663e-11, No Iterations 118
+DICPCG:  Solving for p, Initial residual = 0.000107304048614, Final residual = 7.81237328439e-11, No Iterations 110
+DICPCG:  Solving for p, Initial residual = 0.00046281672291, Final residual = 7.8659586739e-11, No Iterations 112
+DICPCG:  Solving for p, Initial residual = 5.05599739696e-05, Final residual = 9.02180181729e-11, No Iterations 107
+DICPCG:  Solving for p, Initial residual = 0.000624386936057, Final residual = 9.27374865812e-11, No Iterations 112
+DICPCG:  Solving for p, Initial residual = 6.56980190675e-05, Final residual = 9.29092595643e-11, No Iterations 104
+residualPressure = 0.255679646521, residualVelocity = 0.0406972674406
+outer iteration: 7
+BiCGStab:  Solving for Ux, Initial residual = 0.0051124909006, Final residual = 2.61530618234e-11, No Iterations 6
+BiCGStab:  Solving for Uy, Initial residual = 0.00519856950742, Final residual = 8.45775460477e-11, No Iterations 6
+DICPCG:  Solving for p, Initial residual = 0.0161651912452, Final residual = 9.36814201962e-11, No Iterations 128
+DICPCG:  Solving for p, Initial residual = 0.00149419182027, Final residual = 8.10574129499e-11, No Iterations 119
+DICPCG:  Solving for p, Initial residual = 0.00968654877954, Final residual = 8.84739750881e-11, No Iterations 126
+DICPCG:  Solving for p, Initial residual = 0.00093348002902, Final residual = 9.96537139908e-11, No Iterations 117
+DICPCG:  Solving for p, Initial residual = 0.00103306342653, Final residual = 8.31508281301e-11, No Iterations 115
+DICPCG:  Solving for p, Initial residual = 7.41584722172e-05, Final residual = 7.92946732881e-11, No Iterations 109
+DICPCG:  Solving for p, Initial residual = 0.000321434012722, Final residual = 9.23871081137e-11, No Iterations 111
+DICPCG:  Solving for p, Initial residual = 3.51971129016e-05, Final residual = 9.26771033416e-11, No Iterations 104
+DICPCG:  Solving for p, Initial residual = 0.00041787538128, Final residual = 7.17197233749e-11, No Iterations 112
+DICPCG:  Solving for p, Initial residual = 4.56637557423e-05, Final residual = 8.02297125019e-11, No Iterations 107
+residualPressure = 0.216245242681, residualVelocity = 0.030351694821
+outer iteration: 8
+BiCGStab:  Solving for Ux, Initial residual = 0.00392322334329, Final residual = 9.36084936958e-11, No Iterations 6
+BiCGStab:  Solving for Uy, Initial residual = 0.00399318644108, Final residual = 7.37299788335e-11, No Iterations 6
+DICPCG:  Solving for p, Initial residual = 0.0111451580213, Final residual = 8.99560098332e-11, No Iterations 126
+DICPCG:  Solving for p, Initial residual = 0.00107106632531, Final residual = 8.16330963948e-11, No Iterations 118
+DICPCG:  Solving for p, Initial residual = 0.0066528081658, Final residual = 8.92155376768e-11, No Iterations 124
+DICPCG:  Solving for p, Initial residual = 0.00067115906529, Final residual = 7.38553128328e-11, No Iterations 117
+DICPCG:  Solving for p, Initial residual = 0.000680891313549, Final residual = 9.39388836107e-11, No Iterations 113
+DICPCG:  Solving for p, Initial residual = 5.32539877809e-05, Final residual = 9.72349734497e-11, No Iterations 106
+DICPCG:  Solving for p, Initial residual = 0.00023064943135, Final residual = 8.91506214206e-11, No Iterations 110
+DICPCG:  Solving for p, Initial residual = 2.53582084933e-05, Final residual = 9.38992578975e-11, No Iterations 101
+DICPCG:  Solving for p, Initial residual = 0.0002966558329, Final residual = 8.55654680406e-11, No Iterations 111
+DICPCG:  Solving for p, Initial residual = 3.28627823174e-05, Final residual = 8.9960865104e-11, No Iterations 104
+residualPressure = 0.185126567933, residualVelocity = 0.0233141570611
+outer iteration: 9
+BiCGStab:  Solving for Ux, Initial residual = 0.00308362944321, Final residual = 3.02451602597e-13, No Iterations 7
+BiCGStab:  Solving for Uy, Initial residual = 0.00313999012928, Final residual = 6.30012033655e-11, No Iterations 6
+DICPCG:  Solving for p, Initial residual = 0.00797730572207, Final residual = 8.02604305137e-11, No Iterations 126
+DICPCG:  Solving for p, Initial residual = 0.000787573077033, Final residual = 8.41638916238e-11, No Iterations 117
+DICPCG:  Solving for p, Initial residual = 0.00476262165766, Final residual = 9.60907839856e-11, No Iterations 123
+DICPCG:  Solving for p, Initial residual = 0.000494958020858, Final residual = 9.47957183369e-11, No Iterations 115
+DICPCG:  Solving for p, Initial residual = 0.000471717882159, Final residual = 7.64466968542e-11, No Iterations 113
+DICPCG:  Solving for p, Initial residual = 3.92172854977e-05, Final residual = 8.39315507205e-11, No Iterations 103
+DICPCG:  Solving for p, Initial residual = 0.000169714586195, Final residual = 7.03413091184e-11, No Iterations 110
+DICPCG:  Solving for p, Initial residual = 1.87435288883e-05, Final residual = 7.78038775423e-11, No Iterations 97
+DICPCG:  Solving for p, Initial residual = 0.000217695972118, Final residual = 8.93198747543e-11, No Iterations 110
+DICPCG:  Solving for p, Initial residual = 2.42642547418e-05, Final residual = 9.28842334592e-11, No Iterations 102
+residualPressure = 0.159091131191, residualVelocity = 0.0183306087255
+outer iteration: 10
+BiCGStab:  Solving for Ux, Initial residual = 0.00247127939663, Final residual = 4.94777807009e-11, No Iterations 6
+BiCGStab:  Solving for Uy, Initial residual = 0.00251656632717, Final residual = 5.35118724575e-11, No Iterations 6
+DICPCG:  Solving for p, Initial residual = 0.00587515965367, Final residual = 9.54172941665e-11, No Iterations 124
+DICPCG:  Solving for p, Initial residual = 0.00059177146874, Final residual = 8.74561851889e-11, No Iterations 115
+DICPCG:  Solving for p, Initial residual = 0.00351567342649, Final residual = 9.83599122141e-11, No Iterations 118
+DICPCG:  Solving for p, Initial residual = 0.000372879679077, Final residual = 7.98234039906e-11, No Iterations 113
+DICPCG:  Solving for p, Initial residual = 0.000338297695327, Final residual = 7.72289908358e-11, No Iterations 112
+DICPCG:  Solving for p, Initial residual = 2.95024816601e-05, Final residual = 9.87876523608e-11, No Iterations 104
+DICPCG:  Solving for p, Initial residual = 0.000127494631119, Final residual = 7.75564969489e-11, No Iterations 109
+DICPCG:  Solving for p, Initial residual = 1.4142546027e-05, Final residual = 9.03821781242e-11, No Iterations 96
+DICPCG:  Solving for p, Initial residual = 0.000163285504967, Final residual = 9.92328079791e-11, No Iterations 109
+DICPCG:  Solving for p, Initial residual = 1.82952168863e-05, Final residual = 9.57185875369e-11, No Iterations 99
+residualPressure = 0.136961561537, residualVelocity = 0.014690628085
+outer iteration: 11
+BiCGStab:  Solving for Ux, Initial residual = 0.0020131007984, Final residual = 2.00164035103e-11, No Iterations 6
+BiCGStab:  Solving for Uy, Initial residual = 0.00204943154733, Final residual = 4.53883038414e-11, No Iterations 6
+DICPCG:  Solving for p, Initial residual = 0.00442454904749, Final residual = 9.29269338839e-11, No Iterations 124
+DICPCG:  Solving for p, Initial residual = 0.000452755296758, Final residual = 8.73964151655e-11, No Iterations 115
+DICPCG:  Solving for p, Initial residual = 0.00265794558832, Final residual = 9.66492928965e-11, No Iterations 121
+DICPCG:  Solving for p, Initial residual = 0.000285957446934, Final residual = 9.20104129095e-11, No Iterations 112
+DICPCG:  Solving for p, Initial residual = 0.000249244919038, Final residual = 8.87154699549e-11, No Iterations 111
+DICPCG:  Solving for p, Initial residual = 2.25968573867e-05, Final residual = 8.6198809895e-11, No Iterations 104
+DICPCG:  Solving for p, Initial residual = 9.74479223009e-05, Final residual = 8.5220667797e-11, No Iterations 108
+DICPCG:  Solving for p, Initial residual = 1.08571426588e-05, Final residual = 8.53692931797e-11, No Iterations 96
+DICPCG:  Solving for p, Initial residual = 0.000124726557897, Final residual = 8.93485292163e-11, No Iterations 109
+DICPCG:  Solving for p, Initial residual = 1.40396216887e-05, Final residual = 9.59908782721e-11, No Iterations 98
+residualPressure = 0.117886715327, residualVelocity = 0.0119655880644
+outer iteration: 12
+BiCGStab:  Solving for Ux, Initial residual = 0.00166308270648, Final residual = 6.04235005311e-12, No Iterations 6
+BiCGStab:  Solving for Uy, Initial residual = 0.00169216679637, Final residual = 3.85357608043e-11, No Iterations 6
+DICPCG:  Solving for p, Initial residual = 0.00339438974052, Final residual = 7.36140992598e-11, No Iterations 124
+DICPCG:  Solving for p, Initial residual = 0.000351817630056, Final residual = 9.98021045105e-11, No Iterations 113
+DICPCG:  Solving for p, Initial residual = 0.00204657867292, Final residual = 7.34662432697e-11, No Iterations 121
+DICPCG:  Solving for p, Initial residual = 0.000222679798995, Final residual = 7.60830723567e-11, No Iterations 112
+DICPCG:  Solving for p, Initial residual = 0.00018773189613, Final residual = 6.54192957831e-11, No Iterations 111
+DICPCG:  Solving for p, Initial residual = 1.75796013075e-05, Final residual = 8.33328960124e-11, No Iterations 103
+DICPCG:  Solving for p, Initial residual = 7.56209717018e-05, Final residual = 7.65947007072e-11, No Iterations 108
+DICPCG:  Solving for p, Initial residual = 8.46231675505e-06, Final residual = 9.49470690759e-11, No Iterations 95
+DICPCG:  Solving for p, Initial residual = 9.67474012858e-05, Final residual = 7.06677971707e-11, No Iterations 109
+DICPCG:  Solving for p, Initial residual = 1.09381738051e-05, Final residual = 9.48859977752e-11, No Iterations 99
+residualPressure = 0.101406389401, residualVelocity = 0.00988370268249
+outer iteration: 13
+BiCGStab:  Solving for Ux, Initial residual = 0.00139106976714, Final residual = 8.39657716931e-11, No Iterations 5
+BiCGStab:  Solving for Uy, Initial residual = 0.00141421864041, Final residual = 3.2787201101e-11, No Iterations 6
+DICPCG:  Solving for p, Initial residual = 0.00264525701428, Final residual = 9.84181502862e-11, No Iterations 121
+DICPCG:  Solving for p, Initial residual = 0.000277137288294, Final residual = 9.6675405449e-11, No Iterations 112
+DICPCG:  Solving for p, Initial residual = 0.00160037476617, Final residual = 7.67406978629e-11, No Iterations 120
+DICPCG:  Solving for p, Initial residual = 0.000175745464945, Final residual = 8.09922210144e-11, No Iterations 111
+DICPCG:  Solving for p, Initial residual = 0.000143933068593, Final residual = 7.71442515175e-11, No Iterations 110
+DICPCG:  Solving for p, Initial residual = 1.38617452832e-05, Final residual = 9.08346783631e-11, No Iterations 101
+DICPCG:  Solving for p, Initial residual = 5.94559298436e-05, Final residual = 9.3807483232e-11, No Iterations 107
+DICPCG:  Solving for p, Initial residual = 6.68361801655e-06, Final residual = 9.91997444133e-11, No Iterations 93
+DICPCG:  Solving for p, Initial residual = 7.60690990405e-05, Final residual = 7.90769761266e-11, No Iterations 108
+DICPCG:  Solving for p, Initial residual = 8.6355136207e-06, Final residual = 9.30262894275e-11, No Iterations 98
+residualPressure = 0.0871912136859, residualVelocity = 0.00826657941791
+outer iteration: 14
+BiCGStab:  Solving for Ux, Initial residual = 0.00117672854766, Final residual = 6.62941995531e-11, No Iterations 5
+BiCGStab:  Solving for Uy, Initial residual = 0.00119479977224, Final residual = 2.79923996919e-11, No Iterations 6
+DICPCG:  Solving for p, Initial residual = 0.00208971104298, Final residual = 9.16314458955e-11, No Iterations 120
+DICPCG:  Solving for p, Initial residual = 0.00022096231947, Final residual = 9.9568514308e-11, No Iterations 111
+DICPCG:  Solving for p, Initial residual = 0.0012684403999, Final residual = 9.23745169943e-11, No Iterations 119
+DICPCG:  Solving for p, Initial residual = 0.000140373447491, Final residual = 9.19463238804e-11, No Iterations 110
+DICPCG:  Solving for p, Initial residual = 0.000112072384563, Final residual = 6.02637719425e-11, No Iterations 110
+DICPCG:  Solving for p, Initial residual = 1.10616471519e-05, Final residual = 7.40140823951e-11, No Iterations 101
+DICPCG:  Solving for p, Initial residual = 4.73069589449e-05, Final residual = 7.83565898224e-11, No Iterations 107
+DICPCG:  Solving for p, Initial residual = 5.34056403666e-06, Final residual = 8.06813712103e-11, No Iterations 93
+DICPCG:  Solving for p, Initial residual = 6.05256679986e-05, Final residual = 8.94625221791e-11, No Iterations 107
+DICPCG:  Solving for p, Initial residual = 6.89897081127e-06, Final residual = 8.79848479103e-11, No Iterations 97
+residualPressure = 0.0749686313786, residualVelocity = 0.00699149207244
+outer iteration: 15
+BiCGStab:  Solving for Ux, Initial residual = 0.00100525779909, Final residual = 5.60890683186e-11, No Iterations 5
+BiCGStab:  Solving for Uy, Initial residual = 0.00101942108403, Final residual = 2.40045849819e-11, No Iterations 6
+DICPCG:  Solving for p, Initial residual = 0.00167130273953, Final residual = 6.15398539939e-11, No Iterations 120
+DICPCG:  Solving for p, Initial residual = 0.000178094560595, Final residual = 8.04452263628e-11, No Iterations 111
+DICPCG:  Solving for p, Initial residual = 0.00101749504891, Final residual = 7.14184916499e-11, No Iterations 119
+DICPCG:  Solving for p, Initial residual = 0.000113334703875, Final residual = 7.42599389832e-11, No Iterations 110
+DICPCG:  Solving for p, Initial residual = 8.84664368736e-05, Final residual = 7.92161797623e-11, No Iterations 109
+DICPCG:  Solving for p, Initial residual = 8.92253734286e-06, Final residual = 8.81298933842e-11, No Iterations 100
+DICPCG:  Solving for p, Initial residual = 3.80416219882e-05, Final residual = 9.95961426898e-11, No Iterations 105
+DICPCG:  Solving for p, Initial residual = 4.31257601131e-06, Final residual = 9.91467963585e-11, No Iterations 91
+DICPCG:  Solving for p, Initial residual = 4.86820515991e-05, Final residual = 8.87346601076e-11, No Iterations 105
+DICPCG:  Solving for p, Initial residual = 5.57096560528e-06, Final residual = 9.58191119116e-11, No Iterations 96
+residualPressure = 0.0644928360709, residualVelocity = 0.00597162851607
+outer iteration: 16
+BiCGStab:  Solving for Ux, Initial residual = 0.000866285042849, Final residual = 4.91466619679e-11, No Iterations 5
+BiCGStab:  Solving for Uy, Initial residual = 0.000877505099749, Final residual = 2.06912565114e-11, No Iterations 6
+DICPCG:  Solving for p, Initial residual = 0.00135122031875, Final residual = 9.5787582558e-11, No Iterations 119
+DICPCG:  Solving for p, Initial residual = 0.000144971278034, Final residual = 9.22328187945e-11, No Iterations 110
+DICPCG:  Solving for p, Initial residual = 0.000825083869267, Final residual = 8.7239898715e-11, No Iterations 118
+DICPCG:  Solving for p, Initial residual = 9.24060674607e-05, Final residual = 8.63552296294e-11, No Iterations 109
+DICPCG:  Solving for p, Initial residual = 7.06889795491e-05, Final residual = 6.37480588561e-11, No Iterations 109
+DICPCG:  Solving for p, Initial residual = 7.26779197217e-06, Final residual = 7.32314842776e-11, No Iterations 100
+DICPCG:  Solving for p, Initial residual = 3.08916054971e-05, Final residual = 8.71796022742e-11, No Iterations 105
+DICPCG:  Solving for p, Initial residual = 3.51605079665e-06, Final residual = 8.09393952403e-11, No Iterations 91
+DICPCG:  Solving for p, Initial residual = 3.9540969136e-05, Final residual = 8.33928008505e-11, No Iterations 104
+DICPCG:  Solving for p, Initial residual = 4.5427728652e-06, Final residual = 7.89941187988e-11, No Iterations 96
+residualPressure = 0.0555387355688, residualVelocity = 0.00514605382897
+outer iteration: 17
+BiCGStab:  Solving for Ux, Initial residual = 0.000752463228144, Final residual = 4.3854009174e-11, No Iterations 5
+BiCGStab:  Solving for Uy, Initial residual = 0.00076141645935, Final residual = 1.79344679415e-11, No Iterations 6
+DICPCG:  Solving for p, Initial residual = 0.00110341931971, Final residual = 8.06104768232e-11, No Iterations 119
+DICPCG:  Solving for p, Initial residual = 0.00011908836174, Final residual = 7.59033350708e-11, No Iterations 110
+DICPCG:  Solving for p, Initial residual = 0.000675685591991, Final residual = 9.54486715436e-11, No Iterations 116
+DICPCG:  Solving for p, Initial residual = 7.60285626898e-05, Final residual = 9.44540946811e-11, No Iterations 108
+DICPCG:  Solving for p, Initial residual = 5.7112547867e-05, Final residual = 8.47143255141e-11, No Iterations 108
+DICPCG:  Solving for p, Initial residual = 5.97335993139e-06, Final residual = 6.10694234782e-11, No Iterations 100
+DICPCG:  Solving for p, Initial residual = 2.53117652581e-05, Final residual = 9.13407446918e-11, No Iterations 104
+DICPCG:  Solving for p, Initial residual = 2.89214238933e-06, Final residual = 8.98526046618e-11, No Iterations 90
+DICPCG:  Solving for p, Initial residual = 3.24040827944e-05, Final residual = 7.91020539478e-11, No Iterations 103
+DICPCG:  Solving for p, Initial residual = 3.73759457721e-06, Final residual = 9.19076947986e-11, No Iterations 93
+residualPressure = 0.0479005246679, residualVelocity = 0.00447065781524
+outer iteration: 18
+BiCGStab:  Solving for Ux, Initial residual = 0.000658346805052, Final residual = 3.94240777314e-11, No Iterations 5
+BiCGStab:  Solving for Uy, Initial residual = 0.000665534934833, Final residual = 1.56380751314e-11, No Iterations 6
+DICPCG:  Solving for p, Initial residual = 0.000909632477307, Final residual = 9.68615412456e-11, No Iterations 118
+DICPCG:  Solving for p, Initial residual = 9.86534668792e-05, Final residual = 9.21438221194e-11, No Iterations 109
+DICPCG:  Solving for p, Initial residual = 0.000558337911215, Final residual = 8.97339815378e-11, No Iterations 115
+DICPCG:  Solving for p, Initial residual = 6.30791125794e-05, Final residual = 7.69593282963e-11, No Iterations 108
+DICPCG:  Solving for p, Initial residual = 4.66106435011e-05, Final residual = 7.01050319011e-11, No Iterations 108
+DICPCG:  Solving for p, Initial residual = 4.95083823406e-06, Final residual = 8.64465326233e-11, No Iterations 99
+DICPCG:  Solving for p, Initial residual = 2.09125336249e-05, Final residual = 9.79649589601e-11, No Iterations 103
+DICPCG:  Solving for p, Initial residual = 2.3985174456e-06, Final residual = 7.43328413796e-11, No Iterations 90
+DICPCG:  Solving for p, Initial residual = 2.67792780819e-05, Final residual = 9.49424175147e-11, No Iterations 102
+DICPCG:  Solving for p, Initial residual = 3.10076971111e-06, Final residual = 8.94546202641e-11, No Iterations 91
+residualPressure = 0.0413920246453, residualVelocity = 0.00391273996391
+outer iteration: 19
+BiCGStab:  Solving for Ux, Initial residual = 0.000579835432926, Final residual = 3.53063602891e-11, No Iterations 5
+BiCGStab:  Solving for Uy, Initial residual = 0.000585648146921, Final residual = 1.37124940696e-11, No Iterations 6
+DICPCG:  Solving for p, Initial residual = 0.000756261260253, Final residual = 9.67329296697e-11, No Iterations 117
+DICPCG:  Solving for p, Initial residual = 8.23596047153e-05, Final residual = 7.68144053659e-11, No Iterations 109
+DICPCG:  Solving for p, Initial residual = 0.000465210440561, Final residual = 9.82272047714e-11, No Iterations 113
+DICPCG:  Solving for p, Initial residual = 5.27411107742e-05, Final residual = 9.03207108942e-11, No Iterations 107
+DICPCG:  Solving for p, Initial residual = 3.84283924167e-05, Final residual = 8.58268417209e-11, No Iterations 107
+DICPCG:  Solving for p, Initial residual = 4.13540291558e-06, Final residual = 7.36420252612e-11, No Iterations 99
+DICPCG:  Solving for p, Initial residual = 1.74133290116e-05, Final residual = 8.48811187466e-11, No Iterations 103
+DICPCG:  Solving for p, Initial residual = 2.00432299265e-06, Final residual = 8.67466761342e-11, No Iterations 89
+DICPCG:  Solving for p, Initial residual = 2.23012272346e-05, Final residual = 8.25249455999e-11, No Iterations 102
+DICPCG:  Solving for p, Initial residual = 2.59210148186e-06, Final residual = 9.05164927726e-11, No Iterations 90
+residualPressure = 0.0358480919332, residualVelocity = 0.00344778689541
+outer iteration: 20
+BiCGStab:  Solving for Ux, Initial residual = 0.000513810409236, Final residual = 3.12622316563e-11, No Iterations 5
+BiCGStab:  Solving for Uy, Initial residual = 0.000518547784058, Final residual = 1.20899701318e-11, No Iterations 6
+DICPCG:  Solving for p, Initial residual = 0.00063366398935, Final residual = 9.27586551846e-11, No Iterations 116
+DICPCG:  Solving for p, Initial residual = 6.92520848757e-05, Final residual = 9.01683522158e-11, No Iterations 108
+DICPCG:  Solving for p, Initial residual = 0.00039063606553, Final residual = 8.94927235139e-11, No Iterations 112

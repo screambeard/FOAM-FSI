@@ -1,0 +1,54 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM Extend Project: Open Source CFD        |
+|  \\    /   O peration     | Version:  1.6-ext                               |
+|   \\  /    A nd           | Web:      www.extend-project.de                 |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      fvSolution;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+solvers
+{
+    p
+    {
+        solver           PCG;
+        preconditioner   DIC;
+        tolerance        1e-12;
+        relTol           0.005;
+		minIter			 1;
+    };
+
+    U
+    {
+        solver           BiCGStab;
+        preconditioner   DILU;
+        tolerance        1e-12;
+        relTol           0.005;
+		minIter			 1;
+    };
+}
+
+PIMPLE
+{
+    checkMeshCourantNo true;
+    momentumPredictor yes;
+
+    nOuterCorrectors 200;
+    nCorrectors     10;
+    nNonOrthogonalCorrectors 1;
+
+    pRefCell		0;
+    pRefValue       0;
+
+    outerConvergence 1e-10;
+    innerConvergence 0;
+}
+
+// ************************************************************************* //

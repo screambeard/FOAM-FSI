@@ -1,0 +1,8 @@
+kOmegaSST_LowRe_sust/kOmegaSST_LowRe_sust.C
+kOmegaSSTsust/kOmegaSSTsust.C
+kkLOmega/kkLOmega.C
+
+wallFunctions/kLowReWallFunction/kLowReWallFunctionFvPatchScalarField.C
+wallFunctions/nutLowReWallFunction/nutLowReWallFunctionFvPatchScalarField.C
+
+LIB = $(FOAM_USER_LIBBIN)/libmyTurbulenceModels

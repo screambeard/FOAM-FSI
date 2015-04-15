@@ -1,0 +1,82 @@
+#!/usr/bin/python
+from PyFoam.RunDictionary.ParsedParameterFile import ParsedParameterFile
+import sys
+import os
+import shutil
+import subprocess
+from Queue import Queue
+from threading import Thread
+
+## ========= Function definitions ========= ##
+def clonecase(basecase,case,cleanscript):
+    shutil.copytree(basecase,case)
+    subprocess.call(case+"/"+cleanscript)
+
+def runcase(caseQueu,runscript):
+    while True:
+        case = caseQueu.get()
+        print case + " start"
+
+        FNULL = open(os.devnull, 'w')
+        p = subprocess.call(case+"/"+runscript, stdout=FNULL, stderr=subprocess.STDOUT)
+
+        print case + " done"
+        caseQueu.task_done()
+
+#input
+nprocs=4
+build=True
+run=True
+
+#scripts and names
+runscript="run"
+cleanscript="clean"
+basecase="base"
+basename='cic'
+
+#variables
+schemes=["bdf1","bdf2","bdf3"]
+dts=[0.000125,0.000625,0.00125,0.0025,0.005,0.01,0.02]
+writeInterval0=1600;
+
+nDts=len(dts)
+nSchemes=len(schemes)
+
+#building cases
+if build:
+    for k in range(nSchemes):
+        os.mkdir(schemes[k])
+        for i in range(nDts):
+            casename=schemes[k]+"/"+basename+"_dt"+str(dts[i])
+            print "Building " + casename
+            clonecase(basecase,casename,cleanscript)
+
+            ctrlDict=ParsedParameterFile(casename+"/system/controlDict")
+            ctrlDict["deltaT"]=str(dts[i])
+            ctrlDict["writeInterval"]="%d" %(writeInterval0*dts[0]/dts[i])
+            ctrlDict.writeFile()
+
+            fvSchemes=ParsedParameterFile(casename+"/system/fvSchemes")
+            fvSchemes["ddtSchemes"]["default"]=schemes[k]
+            fvSchemes["ddtSchemes"]["ddt(U)"]=schemes[k]
+            fvSchemes.writeFile()
+
+#running cases
+if run:
+    ncases=nSchemes*nDts
+    caseQueu = Queue(maxsize=0)
+
+    #creating threads
+    for i in range(nprocs):
+        worker = Thread(target=runcase, args=(caseQueu,runscript))
+        worker.setDaemon(True)
+        worker.start()
+
+    #creating jobs
+    for j in range(nDts):
+        for k in range(nSchemes):
+            casename=schemes[k]+"/"+basename+"_dt"+str(dts[j])
+            caseQueu.put(casename)
+
+    #gather jobs
+    caseQueu.join()
