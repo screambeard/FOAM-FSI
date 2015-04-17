@@ -26,8 +26,6 @@ for (int nonOrth=0; nonOrth<=nNonOrthCorr; nonOrth++)
     }
 }
 
-#include "continuityErrs.H"
-
 //U -= rUA*fvc::grad(p);
 U -= (1.0/AU)*fvc::grad(p);
 U.correctBoundaryConditions();

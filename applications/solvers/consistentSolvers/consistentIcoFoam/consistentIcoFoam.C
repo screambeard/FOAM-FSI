@@ -73,7 +73,9 @@ int main(int argc, char *argv[])
             {
 #               include "pEqn.H"
                 corr++;
-            }while(innerResidual > innerTolerance && corr < nCorr);for (int corr=0; corr<nCorr; corr++)
+            }while(innerResidual > innerTolerance && corr < nCorr);for (int corr=0; corr<nCorr; corr++);
+
+			#include "continuityErrs.H"
 
             //Check convergence
             #include "checkPISOResidualConvergence.H"
