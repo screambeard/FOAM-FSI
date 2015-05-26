@@ -1,0 +1,4 @@
+matrixMatrixTesting.C
+inverseMatrixLibrary.C
+
+EXE = $(FOAM_USER_APPBIN)/matrixMatrixTesting
