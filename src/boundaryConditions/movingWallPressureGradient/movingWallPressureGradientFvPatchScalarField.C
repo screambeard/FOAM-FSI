@@ -174,7 +174,6 @@ void Foam::movingWallPressureGradientFvPatchScalarField::updateCoeffs()
     }*/
 
     gradient() = -(ddtU(U) & patch().Sf())/patch().magSf();
-    //gradient() = (phip - (patch().Sf() & Up))/patch().magSf()/rAp;
 
     fixedGradientFvPatchScalarField::updateCoeffs();
 }
