@@ -1,6 +1,6 @@
 /*--------------------------------*- C++ -*----------------------------------*\
 | =========                 |                                                 |
-| \\      /  F ield         | OpenFOAM Extend Project: Open Source CFD        |
+| \\      /  F ield         | OpenFOAM Extend Project: Open source CFD        |
 |  \\    /   O peration     | Version:  1.6-ext                               |
 |   \\  /    A nd           | Web:      www.extend-project.de                 |
 |    \\/     M anipulation  |                                                 |
@@ -10,33 +10,22 @@ FoamFile
     version     2.0;
     format      ascii;
     class       dictionary;
-    object      motionProperties;
+    object      writeSetsDict;
 }
+
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-dynamicFvMesh   dynamicMotionSolverFvMesh;
+//Fields to be written out
+fields ( U p );
 
-solver          RBFMeshMotionSolver;
+//All above fields are written out for these cellSets
+cellSets ( convergenceSet );
 
-movingPatches   ( flaptop flapbottom flapback );
+//All above fields are written out for these faceSets
+faceSets ();
 
-staticPatches   ( wingtop wingbottom );
+//All above fields are written out for these patches
+patches ();
 
-fixedPatches 	( farfield );
 
-coarsening
-{
-  enabled true;
-  tol 1.0e-3;
-  minPoints 10;
-  maxPoints 300;
-  
-  livePointSelection true;
-  tolLivePointSelection 1e-2;
-  exportSelectedPoints true;
-}
-
-interpolation
-{
-  function TPS;
-}
+// ************************************************************************* //
